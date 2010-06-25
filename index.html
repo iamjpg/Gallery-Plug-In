@@ -7,6 +7,7 @@
 	<title>Flickr jQuery Photo Gallery Example</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="J.P. Given - http://johnpatrickgiven.com">
+	
 	<!-- Custom styles. -->
 	<style>
 		/* Image will scale to whatever width and height you set here. */
@@ -29,24 +30,29 @@
 			background-color: #000;
 		}
 	</style>
-	<!-- link to style file from plug-in -->
+	
+	<!-- link to plug-in style sheet -->
 	<link rel="stylesheet" href="js/jquery-flickr-gallery/jquery-flickr.css" type="text/css" charset="utf-8">
-	<script src="js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- Google hosted jQuery core -->
+	<script src="http://www.google.com/jsapi"></script>
+	<script>google.load("jquery", "1");</script>
+	
 	<!-- Link to js file from plug-in -->
 	<script src="js/jquery-flickr-gallery/jquery-flickr-gallery.js" type="text/javascript" charset="utf-8"></script>
+	
 	<!-- JS call to set up gallery -->
 	<script>
-		// $('#flickr_div').flickrGallery('FLICKR_SET_ID','YOUR_FLICKR_API_KEY');
 		// Replace the setID below with your setID
-		// REPLACE MY API KEY : Get your flickrAPI here: http://www.flickr.com/services/api/misc.api_keys.html
+		// Get your flickrAPI here: http://www.flickr.com/services/api/misc.api_keys.html
 		$(document).ready(function() {
-		    $('#flickr_div').flickrGallery('72157622617592496','5dae9b03980e10344afd862c38843c38');
+		    $('#flickr_div').flickrGallery('FLICKR_SET_ID','YOUR_FLICKR_API_KEY');
 		});
 	</script>
 </head>
 <body>
 	<div id="flickr_div"></div>
-	<!-- "flickr_count" Required if you want count and titles (ie: 1 of 35 : title here) style as you would like. -->
+	<!-- "flickr_count" Required if you want count and titles - Styled above. -->
 	<div id="flickr_count"></div>
 </body>
 </html>
