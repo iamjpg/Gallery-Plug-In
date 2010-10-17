@@ -6,7 +6,7 @@
 ******************************************************************************************/
 //Globals
 
-jqf = {} // Container to avoid namespace collisions.
+var jqf = {} // Container to avoid namespace collisions.
 
 jqf.jqfobj = null; // Container jqfobject
 jqf.x = 0; // Object X
