@@ -1,0 +1,10 @@
+The jQuery Flickr Gallery Plug-In
+
+Requirements:
+
+Your own Flickr API Key which can be obtained at http://www.flickr.com/services/api/misc.api_keys.html
+
+A Flickr Set for the plug in interact with.  If you need help in setting up a Flickr set please see this guide:
+
+http://www.flickr.com/help/collections
+

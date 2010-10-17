@@ -5,17 +5,20 @@
 	* Useage: anyone so long as credit is left alone...oh and get your own API key ;)
 ******************************************************************************************/
 //Globals
-var obj = null; // Container object
-var x = 0; // Object X
-var y = 0; // Object Y
-var c = 0; // Object center point
-var ct = 0; // Object center point from top
-var mX = 0; // Mouse X
-var mY = 0;  // Mouse Y
-var imgArray = new Array(); // Array to hold urls to flickr images
-var titleArray = new Array(); // Array to hold image titles if they exist
-var currentIndex = 0; // Default image index
-var fImg = null; // For checking if the image object is loaded.
+
+jqf = {} // Container to avoid namespace collisions.
+
+jqf.jqfobj = null; // Container jqfobject
+jqf.x = 0; // Object X
+jqf.y = 0; // Object Y
+jqf.c = 0; // Object center point
+jqf.ct = 0; // Object center point from top
+jqf.mX = 0; // Mouse X
+jqf.mY = 0;  // Mouse Y
+jqf.imgArray = new Array(); // Array to hold urls to flickr images
+jqf.titleArray = new Array(); // Array to hold image titles if they exist
+jqf.currentIndex = 0; // Default image index
+jqf.fImg = null; // For checking if the image jqfobject is loaded.
 
 // Callback for Flickr - Simply set array
 function setFlickrData(flickrData) {
@@ -26,8 +29,8 @@ function setFlickrData(flickrData) {
 		var photoURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret +'.jpg'
 		var thumbURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret + '_s.jpg'
 		thumbHTML += '<img src=' + thumbURL + ' width="50" height="50" onclick="navImg('+ i +');toggleUp();" style="cursor: pointer;">';
-		imgArray[i] = photoURL;
-		titleArray[i] = flickrData.photoset.photo[i].title;
+		jqf.imgArray[i] = photoURL;
+		jqf.titleArray[i] = flickrData.photoset.photo[i].title;
 	}
 	
 	$("#flickr_thumbs").html(thumbHTML);
@@ -51,14 +54,14 @@ function navImg(index) {
 	// Create an image Obj with the URL from array
 	var thsImage = null;
 	thsImage = new Image();
-	thsImage.src = imgArray[index];
+	thsImage.src = jqf.imgArray[index];
 	
 	// Set global imgObj to jQuery img Object
 	fImg = $( thsImage );
 	
 	// Display the image
-	obj.html('');
-	obj.html('<img id="thsImage" src=' + imgArray[index] + ' border=0>');
+	jqfobj.html('');
+	jqfobj.html('<img id="thsImage" src=' + jqf.imgArray[index] + ' border=0>');
 	
 	// Call to function to take loader away once image is fully loaded
 	checkImageLoad();
@@ -69,17 +72,17 @@ function navImg(index) {
 		var h = $("#thsImage").outerHeight(true);
 		if (w > h) {
 			var fRatio = w/h;
-			$("#thsImage").css("width",obj.outerWidth(true));
-			$("#thsImage").css("height",Math.round(obj.outerWidth(true) * (1/fRatio)));
+			$("#thsImage").css("width",jqfobj.outerWidth(true));
+			$("#thsImage").css("height",Math.round(jqfobj.outerWidth(true) * (1/fRatio)));
 		} else {
 			var fRatio = h/w;
-			$("#thsImage").css("height",obj.outerHeight(true));
-			$("#thsImage").css("width",Math.round(obj.outerHeight(true) * (1/fRatio)));
+			$("#thsImage").css("height",jqfobj.outerHeight(true));
+			$("#thsImage").css("width",Math.round(jqfobj.outerHeight(true) * (1/fRatio)));
 		}
 		
-		if (obj.outerHeight() > $("#thsImage").outerHeight()) {
+		if (jqfobj.outerHeight() > $("#thsImage").outerHeight()) {
 			var thisHalfImage = $("#thsImage").outerHeight()/2;
-			var thisTopOffset = (obj.outerHeight()/2) - thisHalfImage;
+			var thisTopOffset = (jqfobj.outerHeight()/2) - thisHalfImage;
 			$("#thsImage").css("margin-top",thisTopOffset+"px");
 		}
 }
@@ -91,9 +94,9 @@ function checkImageLoad() {
 	} else {
 		$("#flickr_loader").fadeOut();
 		var current_count = currentIndex + 1;
-		$("#flickr_count").html("Photo " + current_count + " of " + imgArray.length);
-		if (titleArray[currentIndex] != "") {
-			$("#flickr_count").append(" : " + titleArray[currentIndex]);
+		$("#flickr_count").html("Photo " + current_count + " of " + jqf.imgArray.length);
+		if (jqf.titleArray[currentIndex] != "") {
+			$("#flickr_count").append(" : " + jqf.titleArray[currentIndex]);
 		}
 	}
 }
@@ -104,18 +107,18 @@ function toggleUp() {
 
 // Sort of like an init() but re-positions dynamic elements if browser resized.
 $(window).resize(function() {
-	// Get the position of the element Flickr obj will be loaded into
-	x = obj.offset().left;
-	y = obj.offset().top;
-	c = x + (obj.outerWidth(true) / 2);
-	ct = y + (obj.outerHeight(true) / 2);
+	// Get the position of the element Flickr jqfobj will be loaded into
+	x = jqfobj.offset().left;
+	y = jqfobj.offset().top;
+	c = x + (jqfobj.outerWidth(true) / 2);
+	ct = y + (jqfobj.outerHeight(true) / 2);
 	
 	$("#flickr_loader").css("background-color","#fff"); // Set background color of loader to the background-color of container
-	$("#flickr_loader").css("width",obj.width() + "px");
-	$("#flickr_loader").css("height",obj.height() + "px");
+	$("#flickr_loader").css("width",jqfobj.width() + "px");
+	$("#flickr_loader").css("height",jqfobj.height() + "px");
 
-	$("#flickr_thumbs").css("background-color",obj.css("background-color"));
-	$("#flickr_thumbs").css("width",obj.width() + "px");
+	$("#flickr_thumbs").css("background-color",jqfobj.css("background-color"));
+	$("#flickr_thumbs").css("width",jqfobj.width() + "px");
 	$("#flickr_thumbs").css("left",x + "px");
 	$("#flickr_thumbs").css("top",y + "px");
 });
@@ -126,7 +129,7 @@ $(window).resize(function() {
 	// plugin definition
 	$.fn.flickrGallery = function(setID,apiKEY) {		
 		// Set Obj to the Object
-		obj = this;
+		jqfobj = this;
 		
 		// Assure images are centered
 		this.css("text-align","center")
@@ -134,11 +137,11 @@ $(window).resize(function() {
 		// init the image loader and set values
 		$("body").append('<div id="flickr_loader"></div>');
 		$("#flickr_loader").css("background-color","#fff"); // Set background color of loader to the background-color of container
-		$("#flickr_loader").css("width",obj.width() + "px");
-		$("#flickr_loader").css("height",obj.height() + "px");
+		$("#flickr_loader").css("width",jqfobj.width() + "px");
+		$("#flickr_loader").css("height",jqfobj.height() + "px");
 		
-		// CSS object overflow for aspect ratio
-		obj.css("overflow","hidden");
+		// CSS jqfobject overflow for aspect ratio
+		jqfobj.css("overflow","hidden");
 		
 		// Get the Flickr Set :)
 		$.getScript("http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&photoset_id=" + setID + "&api_key=" + apiKEY + "&jsoncallback=setFlickrData", function(data){
@@ -150,11 +153,11 @@ $(window).resize(function() {
 		$("body").append('<div id="flickr_next"></div>');
 		$("body").append('<div id="flickr_prev"></div>');
 		
-		// Get the position of the element Flickr obj will be loaded into
+		// Get the position of the element Flickr jqfobj will be loaded into
 		x = this.offset().left;
 		y = this.offset().top;
-		c = x + (obj.outerWidth(true) / 2);
-		ct = y + (obj.outerHeight(true) / 2);
+		c = x + (jqfobj.outerWidth(true) / 2);
+		ct = y + (jqfobj.outerHeight(true) / 2);
 		
 		// position loader
 		$("#flickr_loader_table").css("left",x + "px");
@@ -162,17 +165,17 @@ $(window).resize(function() {
 		
 		// Append the Thumbs holder to the body
 		$("body").append('<div id="flickr_thumbs"></div>');
-		$("#flickr_thumbs").css("background-color",obj.css("background-color"));
-		$("#flickr_thumbs").css("width",obj.width() + "px");
+		$("#flickr_thumbs").css("background-color",jqfobj.css("background-color"));
+		$("#flickr_thumbs").css("width",jqfobj.width() + "px");
 		$("#flickr_thumbs").css("left",x + "px");
 		$("#flickr_thumbs").css("top",y + "px");
 		
 		
 		// Set navigation click events
 		$("#flickr_next").click(function() {
-			if (currentIndex < (imgArray.length - 1)) {
-				currentIndex = currentIndex + 1;
-				navImg(currentIndex);
+			if (currentIndex < (jqf.imgArray.length - 1)) {
+				jqf.currentIndex = jqf.currentIndex + 1;
+				navImg(jqf.currentIndex);
 			}
 		});
 		
@@ -188,9 +191,9 @@ $(window).resize(function() {
 			mX = e.pageX;
 			mY = e.pageY;
 			
-			// Bounding box coordinents of object
-			var bY = y + obj.outerHeight(true);
-			var rX = x + obj.outerWidth(true);
+			// Bounding box coordinents of jqfobject
+			var bY = y + jqfobj.outerHeight(true);
+			var rX = x + jqfobj.outerWidth(true);
 			if (((mY > y) && (mY < bY)) && ((mX > x) && (mX < rX))) {
 				if (mY < (y + 50)) {
 					$("#flickr_thumbs").slideDown("slow");
