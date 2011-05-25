@@ -216,7 +216,6 @@ var flickrhelpers = null;
 			var rX = settings.x + element.outerWidth(true);
 			if (((settings.mY > settings.y) && (settings.mY < bY)) && ((settings.mX > settings.x) && (settings.mX < rX))) {
 				if (settings.mY < (settings.y + 50)) {
-					console.log("hello");
 					$("#flickr_thumbs").slideDown("slow");
 				} else if ((settings.mY > (settings.y + $("#flickr_thumbs").outerHeight()))) {
 					$("#flickr_thumbs").slideUp("slow");
