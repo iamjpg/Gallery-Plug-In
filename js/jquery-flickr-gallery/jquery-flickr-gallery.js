@@ -5,7 +5,7 @@
 	* Useage: anyone so long as credit is left alone...oh and get your own API key ;)
 ******************************************************************************************/
 
-var helpers = null;
+var flickrhelpers = null;
 
 (function(jQuery) {
 
@@ -46,13 +46,13 @@ var helpers = null;
 					for (i=0; i<length; i++) {
 						var photoURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret +'.jpg'
 						var thumbURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret + '_s.jpg'
-						thumbHTML += '<img src=' + thumbURL + ' width="50" height="50" onclick="helpers.navImg('+ i +');helpers.toggleUp();" style="cursor: pointer;">';
+						thumbHTML += '<img src=' + thumbURL + ' width="50" height="50" onclick="flickrhelpers.navImg('+ i +');flickrhelpers.toggleUp();" style="cursor: pointer;">';
 						settings.imgArray[i] = photoURL;
 						settings.titleArray[i] = flickrData.photoset.photo[i].title;
 					}
 					
 					// When data is set, load first image.
-					helpers.navImg(0);
+					flickrhelpers.navImg(0);
 					
 					// Create previous and next buttons
 					$("body").append('<div id="flickr_next"></div>');
@@ -62,14 +62,14 @@ var helpers = null;
 					$("#flickr_next").click(function() {
 						if (settings.currentIndex < (settings.imgArray.length - 1)) {
 							settings.currentIndex = settings.currentIndex + 1;
-							helpers.navImg(settings.currentIndex);
+							flickrhelpers.navImg(settings.currentIndex);
 						}
 					});
 
 					$("#flickr_prev").click(function() {
 						if (settings.currentIndex > 0) {
 							settings.currentIndex = settings.currentIndex - 1;
-							helpers.navImg(settings.currentIndex);
+							flickrhelpers.navImg(settings.currentIndex);
 						}
 					});
 					
@@ -102,7 +102,7 @@ var helpers = null;
 		}
 		
 		// Helper functions here
-		helpers = {
+		flickrhelpers = {
 			navImg : function (index) {
 				// Set the global index
 				currentIndex = index;
