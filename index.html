@@ -1,77 +1,61 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
-
-  <title>iamjpg/jQuery-Flickr-Gallery-Plug-In @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #c2882d;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #3d77d2; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #3d77d2; }
-    h3 { text-align: center; color: #3d77d2; }
-    a { color: #3d77d2; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Flickr jQuery Photo Gallery Example</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="J.P. Given - http://johnpatrickgiven.com">
+	
+	<!-- Custom styles. -->
+	<style>
+		/* Image will scale to whatever width and height you set here. */
+		#flickr_div {
+			width: 640px;
+			height: 480px;
+			margin: auto;
+			margin-top: 15px;
+			background-color: #000;
+			text-align: center; /* important */
+		}
+		#flickr_count {
+			width: 610px;
+			margin: auto;
+			margin-top: 15px;
+			font-size: 12px;
+			color: #ff358b;
+			padding: 15px;
+			font-style: italic;
+			background-color: #000;
+		}
+	</style>
+	
+	<!-- link to plug-in style sheet -->
+	<link rel="stylesheet" href="js/jquery-flickr-gallery/jquery-flickr.css" type="text/css" charset="utf-8">
+	
+	<!-- Google hosted jQuery core -->
+	<script src="http://www.google.com/jsapi"></script>
+	<script>google.load("jquery", "1");</script>
+	
+	<!-- Link to js file from plug-in -->
+	<script src="js/jquery-flickr-gallery/jquery-flickr-gallery.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- JS call to set up gallery -->
+	<script>
+		// Replace the setID below with your setID
+		// Get your flickrAPI here: http://www.flickr.com/services/api/misc.api_keys.html
+		$(document).ready(function() {
+		    $('#flickr_div').flickrGallery({
+				"flickrSet" : "72157622617592496",
+				"flickrKey" : "5dae9b03980e10344afd862c38843c38"
+			});
+		});
+	</script>
 </head>
-
 <body>
-  <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In">jQuery-Flickr-Gallery-Plug-In</a>
-      <span class="small">by <a href="http://github.com/iamjpg">iamjpg</a></span></h1>
-
-    <div class="description">
-      jQuery Flickr Photo Gallery Plug-In - Powered by Flickr Sets
-    </div>
-
-    <h2>Authors</h2>
-<p>J.P. Given (jgiven@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>J.P. Given (jgiven@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In/zipball/master">zip</a> or
-      <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/iamjpg/jQuery-Flickr-Gallery-Plug-In">iamjpg/jQuery-Flickr-Gallery-Plug-In</a>
-    </div>
-
-  </div>
-
-  
+	<div id="flickr_div"></div>
+	<!-- "flickr_count" Required if you want count and titles - Styled above. -->
+	<div id="flickr_count"></div>
 </body>
 </html>
