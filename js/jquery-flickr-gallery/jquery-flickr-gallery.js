@@ -51,9 +51,6 @@ var flickrhelpers = null;
 						settings.titleArray[i] = flickrData.photoset.photo[i].title;
 					}
 					
-					// When data is set, load first image.
-					flickrhelpers.navImg(0);
-					
 					// Create previous and next buttons
 					$("body").append('<div id="flickr_next"></div>');
 					$("body").append('<div id="flickr_prev"></div>');
@@ -76,8 +73,8 @@ var flickrhelpers = null;
 					// Get the position of the element Flickr jqfobj will be loaded into
 					settings.x = element.offset().left;
 					settings.y = element.offset().top;
-					settings.c = settings.x + (element.outerWidth(true) / 2);
-					settings.ct = settings.y + (element.outerHeight(true) / 2);
+					settings.c = settings.x + (element.width() / 2);
+					settings.ct = settings.y + (element.height() / 2);
 					
 					// position loader
 					$("#flickr_loader").css({
@@ -95,6 +92,9 @@ var flickrhelpers = null;
 					$("#flickr_thumbs").html(thumbHTML);
 
 					$("#flickr_thumbs").slideUp("slow");
+					
+					// When data is set, load first image.
+					flickrhelpers.navImg(0);
 					
 				});
 				
@@ -130,16 +130,16 @@ var flickrhelpers = null;
 				// Call to function to take loader away once image is fully loaded
 				$("#thsImage").load(function() {
 					// Set the aspect ratio
-					var w = $("#thsImage").outerWidth(true);
-					var h = $("#thsImage").outerHeight(true);
+					var w = $("#thsImage").width();
+					var h = $("#thsImage").height();
 					if (w > h) {
 						var fRatio = w/h;
-						$("#thsImage").css("width",element.outerWidth(true));
-						$("#thsImage").css("height",Math.round(element.outerWidth(true) * (1/fRatio)));
+						$("#thsImage").css("width",element.width());
+						$("#thsImage").css("height",Math.round(element.width() * (1/fRatio)));
 					} else {
 						var fRatio = h/w;
-						$("#thsImage").css("height",element.outerHeight(true));
-						$("#thsImage").css("width",Math.round(element.outerHeight(true) * (1/fRatio)));
+						$("#thsImage").css("height",element.height());
+						$("#thsImage").css("width",Math.round(element.height() * (1/fRatio)));
 					}
 
 					if (element.outerHeight() > $("#thsImage").outerHeight()) {
@@ -193,8 +193,8 @@ var flickrhelpers = null;
 			// Get the position of the element Flickr jqfobj will be loaded into
 			settings.x = element.offset().left;
 			settings.y = element.offset().top;
-			settings.c = settings.x + (element.outerWidth(true) / 2);
-			settings.ct = settings.y + (element.outerHeight(true) / 2);
+			settings.c = settings.x + (element.width() / 2);
+			settings.ct = settings.y + (element.height() / 2);
 
 			$("#flickr_loader").css("background-color","#fff"); // Set background color of loader to the background-color of container
 			$("#flickr_loader").css("width",element.width() + "px");
@@ -212,8 +212,8 @@ var flickrhelpers = null;
 			settings.mY = e.pageY;
 			
 			// Bounding box coordinents of jqfobject
-			var bY = settings.y + element.outerHeight(true);
-			var rX = settings.x + element.outerWidth(true);
+			var bY = settings.y + element.height();
+			var rX = settings.x + element.width();
 			if (((settings.mY > settings.y) && (settings.mY < bY)) && ((settings.mX > settings.x) && (settings.mX < rX))) {
 				if (settings.mY < (settings.y + 50)) {
 					$("#flickr_thumbs").slideDown("slow");
