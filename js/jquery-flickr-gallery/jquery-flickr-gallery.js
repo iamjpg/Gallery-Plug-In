@@ -177,7 +177,7 @@ var flickrhelpers = null;
 			"imgArray" : [], // Array to hold urls to flickr images
 			"titleArray" : [], // Array to hold image titles if they exist
 			"currentIndex" : 0, // Default image index
-			"fImg" : null, // For checking if the image jqfobject is loaded.
+			"fImg" : null // For checking if the image jqfobject is loaded.
 		}
 		
 		// For extending the defaults!
