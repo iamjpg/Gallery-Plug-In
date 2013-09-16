@@ -10,7 +10,7 @@ var flickrhelpers = null;
 (function(jQuery) {
 
 	jQuery.fn.flickrGallery = function(args) {
-		
+	
 		var $element = jQuery(this), // reference to the jQuery version of the current DOM element
 		    element = this;         // reference to the actual DOM element
 		
@@ -42,9 +42,10 @@ var flickrhelpers = null;
 				
 					var length = flickrData.photoset.photo.length;
 					var thumbHTML = '';
-
+					
+					var mainPhotoResolution = settings.mainPhotoResolution != null && settings.mainPhotoResolution  != '' ? '_'+settings.mainPhotoResolution : '';
 					for (i=0; i<length; i++) {
-						var photoURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret +'.jpg'
+						var photoURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret +mainPhotoResolution+'.jpg'
 						var thumbURL = 'http://farm' + flickrData.photoset.photo[i].farm + '.' + 'static.flickr.com/' + flickrData.photoset.photo[i].server + '/' + flickrData.photoset.photo[i].id + '_' + flickrData.photoset.photo[i].secret + '_s.jpg'
 						thumbHTML += '<img src=' + thumbURL + ' width="50" height="50" onclick="flickrhelpers.navImg('+ i +');flickrhelpers.toggleUp();" style="cursor: pointer;">';
 						settings.imgArray[i] = photoURL;
@@ -177,7 +178,7 @@ var flickrhelpers = null;
 			"imgArray" : [], // Array to hold urls to flickr images
 			"titleArray" : [], // Array to hold image titles if they exist
 			"currentIndex" : 0, // Default image index
-			"fImg" : null, // For checking if the image jqfobject is loaded.
+			"fImg" : null // For checking if the image jqfobject is loaded.
 		}
 		
 		// For extending the defaults!
