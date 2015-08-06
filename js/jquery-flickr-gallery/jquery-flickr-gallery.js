@@ -38,7 +38,7 @@ var flickrhelpers = null;
 				element.css("overflow","hidden");
 				
 				// Get the Flickr Set :)
-				$.getJSON("http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&photoset_id=" + settings.flickrSet + "&api_key=" + settings.flickrKey + "&jsoncallback=?", function(flickrData){
+				$.getJSON("https://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&photoset_id=" + settings.flickrSet + "&api_key=" + settings.flickrKey + "&jsoncallback=?", function(flickrData){
 				
 					var length = flickrData.photoset.photo.length;
 					var thumbHTML = '';
